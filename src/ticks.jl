@@ -156,6 +156,11 @@ function optimize_ticks_typed(x_min::T, x_max::T, extend_ticks,
     is_log_scale = scale ∈ _logScales
     base = get(_logScaleBases, scale, 10.)
 
+    if is_log_scale
+        x_max = ceil(x_max)
+        x_min = floor(x_min)
+    end
+
     # generalizing "order of magnitude"
     xspan = x_max - x_min
     z = bounding_order_of_magnitude(xspan, base)
